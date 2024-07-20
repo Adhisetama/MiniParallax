@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniParallax</title>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        body>section {
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            font: bold 5rem Arial, sans-serif;
+        }
+
+        #circle {
+            background-color: black;
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            position: absolute;
+            left: -200px;
+            bottom: 0px;
+        }
+
+        #box {
+            background-color: black;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            right: -100px;
+            top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <div id="mini">Mini</div>
+        <div id="para">Para</div>
+        <div id="llax">llax</div>
+        <div id="circle"></div>
+        <div id="box"></div>
+    </section>
+    <section></section>
+    <script src="MiniParallax.js"></script>
+    <script>
+        const parallax = new MiniParallax()
+
+
+        const mini = document.getElementById('mini')
+        const para = document.getElementById('para')
+        const box = document.getElementById('box')
+        const circle = document.getElementById('circle')
+
+        // sticky
+        parallax.add({
+            y: [0, 500],
+            i: [0, 500],
+        }, i => {
+            mini.style.transform = `translate3d(0px, ${2*i}px, 0px)`
+            para.style.transform = `translate3d(0px, ${i}px, 0px)`
+            circle.style.transform = `translate3d(0px, ${i}px, 0px)`
+        })
+
+        // circle animation
+        parallax.add({
+            y: [0, 500],
+            i: [-200, parallax.windowW+200]
+        }, i => {
+            circle.style.left = `${i}px`
+        })
+
+
+        // box animation
+        parallax.add({
+            y: [0, parallax.windowH],
+            i: [50, 50+parallax.windowH],
+        }, i => {
+            box.style.top = `${i}px`
+        })
+        parallax.add({
+            y: [0, 100],
+            i: [-100, parallax.windowW-200]
+        }, i => {
+            box.style.right = `${i}px`
+        })
+        parallax.add({
+            y: [100, 200],
+            i: [0, 360]
+        }, i => {
+            box.style.transform = `rotate(${i}deg)`
+        })
+        parallax.add({
+            y: [200, 300],
+            i: [0, parallax.windowH]
+        }, i => {
+            box.style.transform = `translate3d(0px, ${i}px, 0px)`
+        })
+    </script>
+</body>
+
+</html>
