@@ -49,10 +49,10 @@ const miniParallax = new MiniParallax()
 const box = document.getElementById('box')
 miniParallax.add({
     y: [ 100, 400 ], // when scrolls from 100px to 400px
-    ranges [
+    ranges: [
         [ 0, 360 ],   // value i goes from 100 to 400
         [ 100, 400 ], // value j goes from 100 to 400
-        [ 800, 300 ], // value k goes from 100 to 400
+        [ 800, 300 ] // value k goes from 100 to 400
     ]
 }, (i, j, k) => {
     box.style.transform: `rotate(${i}deg)` // rotate once
