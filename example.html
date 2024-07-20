@@ -67,19 +67,15 @@
         // sticky
         parallax.add({
             y: [0, 500],
-            i: [0, 500],
-        }, i => {
+            ranges: [
+                [0, 500],
+                [-200, parallax.windowW+200],
+            ]
+        }, (i, j) => {
+            console.log(i, j)
             mini.style.transform = `translate3d(0px, ${2*i}px, 0px)`
             para.style.transform = `translate3d(0px, ${i}px, 0px)`
             circle.style.transform = `translate3d(0px, ${i}px, 0px)`
-        })
-
-        // circle animation
-        parallax.add({
-            y: [0, 500],
-            i: [-200, parallax.windowW+200]
-        }, i => {
-            circle.style.left = `${i}px`
         })
 
 
