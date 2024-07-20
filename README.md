@@ -50,9 +50,9 @@ const box = document.getElementById('box')
 miniParallax.add({
     y: [ 100, 400 ], // when scrolls from 100px to 400px
     ranges: [
-        [ 0, 360 ],   // value i goes from 100 to 400
+        [ 0, 360 ],   // value i goes from 0 to 360
         [ 100, 400 ], // value j goes from 100 to 400
-        [ 800, 300 ] // value k goes from 100 to 400
+        [ 800, 300 ]  // value k goes from 800 to 300
     ]
 }, (i, j, k) => {
     box.style.transform: `rotate(${i}deg)` // rotate once
@@ -60,3 +60,4 @@ miniParallax.add({
     box.style.left = `${k}px` // move left
 } )
 ```
+Note that you can define as much value range as you need by adding `[ from, to ]` inside `ranges` property and adding one more positional parameter in the callback function
