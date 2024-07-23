@@ -27,27 +27,49 @@ class MiniParallax
         if (range.i !== undefined) {
             const [ minI, maxI ] = range.i
             const ratio = (maxI-minI) / (maxY-minY)
+            let snap = MiniParallax.INITIAL_SNAP
 
             this.functions.push(scrollY => {
-                if (minY < scrollY && scrollY <= maxY ) {
+                if (minY >= scrollY && snap !== MiniParallax.BEFORE_RANGE) {
+                    snap = MiniParallax.BEFORE_RANGE
+                    callback(minI)
+                } else if (minY < scrollY && scrollY <= maxY ) {
+                    if (snap !== MiniParallax.IN_RANGE) snap = MiniParallax.IN_RANGE
                     callback(Math.round(minI + (scrollY - minY) * ratio))
+                } else if (scrollY > maxY && snap !== MiniParallax.AFTER_RANGE) {
+                    snap = MiniParallax.AFTER_RANGE
+                    callback(maxI)
                 }
             })
         } else {
             const ratios = range.ranges.map(r => (r[1]-r[0])/(maxY-minY))
-    
+            const minI = range.ranges.map(r => r[0])
+            const maxI = range.ranges.map(r => r[1])
+            let snap = MiniParallax.INITIAL_SNAP
+
             this.functions.push(scrollY => {
-                if (minY < scrollY && scrollY <= maxY ) {
+                if (minY >= scrollY && snap !== MiniParallax.BEFORE_RANGE) {
+                    snap = MiniParallax.BEFORE_RANGE
+                    callback(...minI)
+                } else if (minY < scrollY && scrollY <= maxY ) {
                     const dy = scrollY - minY
                     callback(...range.ranges.map((r, i) => (
                         Math.round(
                             r[0] + dy*ratios[i]
                         )
                     )))
+                } else if (scrollY > maxY && snap !== MiniParallax.AFTER_RANGE) {
+                    snap = MiniParallax.AFTER_RANGE
+                    callback(maxI)
                 }
             })
         }
     }
+
+    static INITIAL_SNAP = -1
+    static BEFORE_RANGE = 1
+    static IN_RANGE = 2
+    static AFTER_RANGE = 3
 
     
 }
