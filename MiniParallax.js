@@ -60,7 +60,7 @@ class MiniParallax
                     )))
                 } else if (scrollY > maxY && snap !== MiniParallax.AFTER_RANGE) {
                     snap = MiniParallax.AFTER_RANGE
-                    callback(maxI)
+                    callback(...maxI)
                 }
             })
         }

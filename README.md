@@ -34,13 +34,13 @@ miniParallax.add({
     ranges: [
         [ iFrom, iTo ],
         [ jFrom, jTo ],
-        [ kFrom, kTo ],
+        [ kFrom, kTo ]
     ]
 }, (i, j, k) => callback(i, j, k))
 ```
 Suppose the case is same as before, i want the box to "animate" when i scroll from 100px to 400px.
 
-But this time, besides reducing margin-left from 800px to 300px, i also want to rotate the box once and make the box sticky. Here we have multiple value range when scrolling through 100px to 400px.
+But this time, besides reducing style "left" from 800px to 300px, i also want to rotate the box once and make the box sticky. Here we have multiple value range when scrolling through 100px to 400px.
 
 In MiniParallax, the syntax will be:
 ```javascript
